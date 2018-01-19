@@ -1,0 +1,37 @@
+package drools.rules
+
+import org.kie.api.runtime.KieRuntime;
+import com.sep.pricemanagement.model.*;
+
+rule "Od 30 do 80 kvadratnih metara - Pozar - 5% popust"
+    when
+    	kc : KalkulatorCene($list : vrednostiAtributaLista, 
+    			$list contains "Od 30 do 80 kvadratnih metara" && 
+    			$list contains "Pozar")
+    then
+    	kc.setPopust(5);
+        System.out.println(kc.cena);
+end
+
+rule "Preko 80 kvadratnih metara - Vise od 20 godina - Vise od 100.000 EUR - Kradja - 15% popust"
+    when
+    	kc : KalkulatorCene($list : vrednostiAtributaLista, 
+    			$list contains "Preko 80 kvadratnih metara" && 
+    			$list contains "Vise od 20 godina" &&
+    			$list contains "Vise od 100.000 EUR" && 
+    			$list contains "Kradja")
+    then
+    	kc.setPopust(15);
+        System.out.println(kc.cena);
+end
+
+rule "Manje od 30 kvadratnih metara - Manje od 10 godina - Poplava - 3% popust"
+    when
+    	kc : KalkulatorCene($list : vrednostiAtributaLista, 
+    			$list contains "Manje od 30 kvadratnih metara" && 
+    			$list contains "Manje od 10 godina" &&
+    			$list contains "Poplava")
+    then
+    	kc.setPopust(3);
+        System.out.println(kc.cena);
+end

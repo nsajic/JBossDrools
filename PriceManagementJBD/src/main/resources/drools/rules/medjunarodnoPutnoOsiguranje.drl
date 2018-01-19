@@ -1,0 +1,47 @@
+package drools.rules
+
+import org.kie.api.runtime.KieRuntime;
+import com.sep.pricemanagement.model.*;
+
+rule "Evropa - Od 18 do 60 godina - 2% popust"
+    when
+    	kc : KalkulatorCene($list : vrednostiAtributaLista, 
+    			$list contains "Od 18 do 60 godina" && 
+    			$list contains "Evropa")
+    then
+    	kc.setPopust(2);
+        System.out.println(kc.cena);
+end
+
+rule "Azija - Do 18 godina - 10% popust"
+    when  
+    	kc : KalkulatorCene($list : vrednostiAtributaLista, 
+    			$list contains "Do 18 godina" && 
+    			$list contains "Azija" && 
+    			$list contains "Boks")
+    then   
+    	kc.setPopust(10);
+        System.out.println(kc.cena);
+end
+
+rule "Juzna Amerika - Do 18 godina - Fudbal - 15% popust"
+    when  
+    	kc : KalkulatorCene($list : vrednostiAtributaLista, 
+    			$list contains "Do 18 godina" && 
+    			$list contains "Juzna Amerika" && 
+    			$list contains "Fudbal")
+    then   
+    	kc.setPopust(15);
+        System.out.println(kc.cena);
+end
+
+rule "Australija - Do 18 godina - Fudbal - 25% popust"
+    when  
+    	kc : KalkulatorCene($list : vrednostiAtributaLista, 
+    			$list contains "Preko 60 godina" && 
+    			$list contains "Australija" && 
+    			$list contains "30.000 EUR")
+    then   
+    	kc.setPopust(25);
+        System.out.println(kc.cena);
+end

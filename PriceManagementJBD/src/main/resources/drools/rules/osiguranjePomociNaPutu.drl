@@ -1,0 +1,40 @@
+package drools.rules
+
+import org.kie.api.runtime.KieRuntime;
+import com.sep.pricemanagement.model.*;
+
+rule "Do 300 km - Do 1500 EUR - Preko 7 dana - Avion - 10% popust"
+    when
+    	kc : KalkulatorCene($list : vrednostiAtributaLista, 
+    			$list contains "Do 300 km" && 
+    			$list contains "Do 1500 EUR" && 
+    			$list contains "Preko 7 dana" && 
+    			$list contains "Avion")
+    then
+    	kc.setPopust(10);
+        System.out.println(kc.cena);
+end
+
+rule "Do 100 km - Do 1500 EUR - Do 3 dana - Autobus - 5% popust"
+    when
+    	kc : KalkulatorCene($list : vrednostiAtributaLista, 
+    			$list contains "Do 100 km" && 
+    			$list contains "Do 1500 EUR" && 
+    			$list contains "Do 3 dana" && 
+    			$list contains "Autobus")
+    then
+    	kc.setPopust(5);
+        System.out.println(kc.cena);
+end
+
+rule "Preko 300 km - Preko 1500 EUR - Preko 7 dana - Voz - 17% popust"
+    when
+    	kc : KalkulatorCene($list : vrednostiAtributaLista, 
+    			$list contains "Preko 300 km" && 
+    			$list contains "Preko 1500 EUR" && 
+    			$list contains "Preko 7 dana" && 
+    			$list contains "Voz")
+    then
+    	kc.setPopust(17);
+        System.out.println(kc.cena);
+end
